@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import Parse
 
+//Parse Server Setup/Installed At :- https://www.back4app.com
 class ViewController: UIViewController {
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        saveCustomObject()
     }
-
-
+    
+    private func saveCustomObject() {
+        let customTestObect = PFObject(className: "CustomTestObect")
+        customTestObect["checking"] = "isParseConnected"
+        customTestObect.saveInBackground { (success, error) in
+            if success {
+                print("Hurrah, Successfully conected to parse server and saved object. Cheers")
+            }
+        }
+    }
+    
 }
 
