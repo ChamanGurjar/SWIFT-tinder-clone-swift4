@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1ED44B8165062D42EE6AD1E0 /* Pods_Tinder_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433B27F46E7A0A1AE52C0262 /* Pods_Tinder_Clone.framework */; };
+		67A266EE21E9BB3C009F0150 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A266ED21E9BB3C009F0150 /* LoginSignUpViewController.swift */; };
 		67E1313621E8F949009A9B62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E1313521E8F949009A9B62 /* AppDelegate.swift */; };
 		67E1313821E8F949009A9B62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E1313721E8F949009A9B62 /* ViewController.swift */; };
 		67E1313B21E8F949009A9B62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67E1313921E8F949009A9B62 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		14689D9F686AED496CDAA629 /* Pods-Tinder-Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder-Clone.release.xcconfig"; path = "Target Support Files/Pods-Tinder-Clone/Pods-Tinder-Clone.release.xcconfig"; sourceTree = "<group>"; };
 		433B27F46E7A0A1AE52C0262 /* Pods_Tinder_Clone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinder_Clone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67A266ED21E9BB3C009F0150 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		67E1313221E8F949009A9B62 /* Tinder-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinder-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E1313521E8F949009A9B62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67E1313721E8F949009A9B62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 				E1C062CDC7C953786ADA5CE9 /* Pods-Tinder-Clone.debug.xcconfig */,
 				14689D9F686AED496CDAA629 /* Pods-Tinder-Clone.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,6 +82,7 @@
 			children = (
 				67E1313521E8F949009A9B62 /* AppDelegate.swift */,
 				67E1313721E8F949009A9B62 /* ViewController.swift */,
+				67A266ED21E9BB3C009F0150 /* LoginSignUpViewController.swift */,
 				67E1313921E8F949009A9B62 /* Main.storyboard */,
 				67E1313C21E8F94B009A9B62 /* Assets.xcassets */,
 				67E1313E21E8F94B009A9B62 /* LaunchScreen.storyboard */,
@@ -212,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67E1313821E8F949009A9B62 /* ViewController.swift in Sources */,
+				67A266EE21E9BB3C009F0150 /* LoginSignUpViewController.swift in Sources */,
 				67E1313621E8F949009A9B62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
