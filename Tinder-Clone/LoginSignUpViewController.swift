@@ -30,8 +30,7 @@ class LoginSignUpViewController: UIViewController {
     
     @IBAction func loginSignUpUser(_ sender: UIButton) {
         if logInMode {
-            
-            
+            loginUser()
         } else {
             signUpUser()
         }
@@ -56,17 +55,34 @@ class LoginSignUpViewController: UIViewController {
         
         user.signUpInBackground { (success, err) in
             if err != nil {
-                var errorMessage = "Some Error Occured - Please try again."
-                if let error = err as NSError?, let errorText = error.userInfo["error"] as? String {
-                    errorMessage = errorText
-                }
-                self.errorLabel.isHidden = false
-                self.errorLabel.text = errorMessage
+                self.handleError(err, activity: "SignUp")
             } else {
                 print("Hurrah, SignedUp Successfully!")
             }
-            
         }
+        
+    }
+    
+    private func loginUser() {
+        if let userName = usernameTF.text, let password = passwordTF.text {
+            PFUser.logInWithUsername(inBackground: userName, password: password) { (user, err) in
+                if err != nil {
+                    self.handleError(err, activity: "Login")
+                } else {
+                    print("Hurrah, LogedIn Successfully!")
+                }
+            }
+        }
+        
+    }
+    
+    private func handleError(_ err: Error?, activity: String) {
+        var errorMessage = "\(activity) Failed - Please try again."
+        if let error = err as NSError?, let errorText = error.userInfo["error"] as? String {
+            errorMessage = errorText
+        }
+        self.errorLabel.isHidden = false
+        self.errorLabel.text = errorMessage
     }
     
 }
