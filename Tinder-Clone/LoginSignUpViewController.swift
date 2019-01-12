@@ -55,13 +55,12 @@ class LoginSignUpViewController: UIViewController {
         user.password = passwordTF.text!
         
         user.signUpInBackground { (success, err) in
-            
             if err != nil {
                 var errorMessage = "Some Error Occured - Please try again."
                 if let error = err as NSError?, let errorText = error.userInfo["error"] as? String {
                     errorMessage = errorText
                 }
-                self.errorLabel.isHidden = true
+                self.errorLabel.isHidden = false
                 self.errorLabel.text = errorMessage
             } else {
                 print("Hurrah, SignedUp Successfully!")
