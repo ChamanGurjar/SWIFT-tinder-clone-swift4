@@ -43,6 +43,10 @@ class ViewController: UIViewController {
                 print("Interested")
             }
             
+            rotation = CGAffineTransform(rotationAngle: 0)
+            scaleAndRotated = rotation.scaledBy(x: 1, y: 1)
+            swipeLabel.transform = scaleAndRotated
+            
             swipeLabel.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
         }
         
