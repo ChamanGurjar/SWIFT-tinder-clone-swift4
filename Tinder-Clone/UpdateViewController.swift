@@ -24,6 +24,7 @@ class UpdateViewController: UIViewController {
         errorLabel.isHidden = true
         
         fetchUserDetailsFromParse()
+        //createDummyWomenAccount()
     }
     
     //    MARK: - Fetch user details from parse and show on UI
@@ -43,6 +44,28 @@ class UpdateViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func createDummyWomenAccount() {
+        for i in 0..<6 {
+            if let image = UIImage(named: "women\(i)"), let imageData = image.pngData() {
+                let photo = PFFileObject(name: "photo.png", data: imageData)
+                let user = PFUser()
+                user["photo"] = photo
+                user.username = "abc\(i)"
+                user.password = "12345"
+                user["isFemale"] = true
+                user["isInterestedInWoman"] = false
+                user.signUpInBackground(block: { (success, err) in
+                    if success {
+                        print("\(user.username) created")
+                    } else {
+                        print("Error in created dummy women aacount : \(err?.localizedDescription)")
+                    }
+                })
+            }
+        }
+        
     }
     
     //    MARK: - Actions

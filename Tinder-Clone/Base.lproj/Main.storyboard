@@ -148,7 +148,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man" translatesAutoresizingMaskIntoConstraints="NO" id="Yan-tN-9Mc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man" translatesAutoresizingMaskIntoConstraints="NO" id="Yan-tN-9Mc">
                                 <rect key="frame" x="50" y="35" width="275" height="275"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yan-tN-9Mc" secondAttribute="height" multiplier="1:1" id="lRy-yR-uFs"/>
