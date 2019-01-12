@@ -15,6 +15,7 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet private weak var loginSignUpButton: UIButton!
     @IBOutlet private weak var changeLoginSignUpModeButton: UIButton!
     
+    private var inLoggedInMode = true
     
     
     override func viewDidLoad() {
@@ -28,6 +29,16 @@ class LoginSignUpViewController: UIViewController {
     }
     
     @IBAction func changeLoginSignUpMode(_ sender: UIButton) {
-        
+        if inLoggedInMode {
+            loginSignUpButton.setTitle("SignUp", for: .normal)
+            changeLoginSignUpModeButton.setTitle("Login", for: .normal)
+            inLoggedInMode = false
+        } else {
+            loginSignUpButton.setTitle("LogIn", for: .normal)
+            changeLoginSignUpModeButton.setTitle("SignUp", for: .normal)
+            inLoggedInMode = true
+        }
     }
+    
+    
 }
