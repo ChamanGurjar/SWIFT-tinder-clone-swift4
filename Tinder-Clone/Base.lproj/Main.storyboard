@@ -97,6 +97,12 @@
                                     <action selector="changeLoginSignUpMode:" destination="0JC-uV-5Mz" eventType="touchUpInside" id="fRj-RR-1SY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crw-e7-3hd">
+                                <rect key="frame" x="168.5" y="353" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.69043464467005078" green="0.15684840840910561" blue="0.059466691285608712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -113,6 +119,8 @@
                             <constraint firstItem="tS9-kZ-TIS" firstAttribute="centerX" secondItem="CgZ-9P-DzU" secondAttribute="centerX" id="Yo0-NN-ATu"/>
                             <constraint firstItem="OkN-d3-zJG" firstAttribute="centerX" secondItem="CgZ-9P-DzU" secondAttribute="centerX" id="Zvh-Lv-SWb"/>
                             <constraint firstItem="5S9-xz-CL3" firstAttribute="leading" secondItem="Hr4-wI-9l9" secondAttribute="leading" constant="20" id="a3W-ZA-kPE"/>
+                            <constraint firstItem="crw-e7-3hd" firstAttribute="top" secondItem="KCA-BD-pA4" secondAttribute="bottom" constant="25" id="e0u-Vf-TuF"/>
+                            <constraint firstItem="crw-e7-3hd" firstAttribute="centerX" secondItem="CgZ-9P-DzU" secondAttribute="centerX" id="f0b-cl-lxK"/>
                             <constraint firstItem="Hr4-wI-9l9" firstAttribute="trailing" secondItem="iy0-yk-LdW" secondAttribute="trailing" constant="20" id="koM-xv-CvA"/>
                             <constraint firstItem="5S9-xz-CL3" firstAttribute="top" secondItem="iy0-yk-LdW" secondAttribute="bottom" constant="15" id="q9R-fy-vp3"/>
                             <constraint firstItem="KCA-BD-pA4" firstAttribute="centerX" secondItem="CgZ-9P-DzU" secondAttribute="centerX" id="vBM-jK-70V"/>
@@ -121,6 +129,7 @@
                     </view>
                     <connections>
                         <outlet property="changeLoginSignUpModeButton" destination="KCA-BD-pA4" id="jeF-pF-53N"/>
+                        <outlet property="errorLabel" destination="crw-e7-3hd" id="c7z-ps-bka"/>
                         <outlet property="loginSignUpButton" destination="vOK-TK-NeW" id="vYY-6U-F3e"/>
                         <outlet property="passwordTF" destination="5S9-xz-CL3" id="9Sl-Zg-Mm0"/>
                         <outlet property="usernameTF" destination="iy0-yk-LdW" id="eA6-Ps-zUG"/>

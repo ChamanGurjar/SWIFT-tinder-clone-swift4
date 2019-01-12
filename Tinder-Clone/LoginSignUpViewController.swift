@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class LoginSignUpViewController: UIViewController {
     
@@ -14,31 +15,59 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet private weak var passwordTF: UITextField!
     @IBOutlet private weak var loginSignUpButton: UIButton!
     @IBOutlet private weak var changeLoginSignUpModeButton: UIButton!
+    @IBOutlet private weak var errorLabel: UILabel!
     
-    private var inLoggedInMode = true
+    
+    private var logInMode = true
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        errorLabel.isHidden = true
     }
+    
     
     @IBAction func loginSignUpUser(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func changeLoginSignUpMode(_ sender: UIButton) {
-        if inLoggedInMode {
-            loginSignUpButton.setTitle("SignUp", for: .normal)
-            changeLoginSignUpModeButton.setTitle("Login", for: .normal)
-            inLoggedInMode = false
+        if logInMode {
+            
+            
         } else {
-            loginSignUpButton.setTitle("LogIn", for: .normal)
-            changeLoginSignUpModeButton.setTitle("SignUp", for: .normal)
-            inLoggedInMode = true
+            signUpUser()
         }
     }
     
+    @IBAction func changeLoginSignUpMode(_ sender: UIButton) {
+        if logInMode {
+            loginSignUpButton.setTitle("SignUp", for: .normal)
+            changeLoginSignUpModeButton.setTitle("Login", for: .normal)
+            logInMode = false
+        } else {
+            loginSignUpButton.setTitle("LogIn", for: .normal)
+            changeLoginSignUpModeButton.setTitle("SignUp", for: .normal)
+            logInMode = true
+        }
+    }
+    
+    private func signUpUser() {
+        let user = PFUser()
+        user.username = usernameTF.text!
+        user.password = passwordTF.text!
+        
+        user.signUpInBackground { (success, err) in
+            
+            if err != nil {
+                var errorMessage = "Some Error Occured - Please try again."
+                if let error = err as NSError?, let errorText = error.userInfo["error"] as? String {
+                    errorMessage = errorText
+                }
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = errorMessage
+            } else {
+                print("Hurrah, SignedUp Successfully!")
+            }
+            
+        }
+    }
     
 }
