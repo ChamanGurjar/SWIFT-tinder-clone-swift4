@@ -30,6 +30,12 @@ class ViewController: UIViewController {
         let labelPoint = gestureRecognizer.translation(in: view)
         swipeLabel.center = CGPoint(x: view.bounds.width / 2 + labelPoint.x, y: view.bounds.height / 2 + labelPoint.y)
         
+        let xFromCenter = view.bounds.width / 2 - swipeLabel.center.x
+        var rotation = CGAffineTransform(rotationAngle: xFromCenter / 200)
+        let scale = min(100 / abs(xFromCenter), 1)
+        var scaleAndRotated = rotation.scaledBy(x: scale, y: scale)
+        swipeLabel.transform = scaleAndRotated
+        
         if gestureRecognizer.state == .ended {
             if swipeLabel.center.x < (view.bounds.width / 2 - 100) {
                 print("Not Interested")
@@ -39,6 +45,7 @@ class ViewController: UIViewController {
             
             swipeLabel.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
         }
+        
     }
     
     
