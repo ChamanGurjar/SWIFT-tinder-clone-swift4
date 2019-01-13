@@ -86,6 +86,7 @@ class UpdateViewController: UIViewController {
                 self.handleError(err)
             } else {
                 print("Update Successful!")
+                self.performSegue(withIdentifier: "goToFindMatchScreen", sender: nil)
             }
         })
     }

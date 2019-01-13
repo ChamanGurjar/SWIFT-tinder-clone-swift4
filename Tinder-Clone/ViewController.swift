@@ -11,47 +11,82 @@ import Parse
 
 //Parse Server Setup/Installed At :- https://www.back4app.com
 class ViewController: UIViewController {
-    @IBOutlet weak var swipeLabel: UILabel!
+    
+    @IBOutlet weak var matchUserImageView: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDraggingGesture()
+        updateMatchingImage()
     }
     
     private func setupDraggingGesture() {
         //  Pan Gesture is used to drag element Left or Right.
         let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(dragElementLeftOrRight(gestureRecognizer:)))
-        swipeLabel.addGestureRecognizer(swipeGesture)
+        matchUserImageView.addGestureRecognizer(swipeGesture)
     }
     
     @objc private func dragElementLeftOrRight(gestureRecognizer: UIPanGestureRecognizer) {
         let labelPoint = gestureRecognizer.translation(in: view)
-        swipeLabel.center = CGPoint(x: view.bounds.width / 2 + labelPoint.x, y: view.bounds.height / 2 + labelPoint.y)
+        matchUserImageView.center = CGPoint(x: view.bounds.width / 2 + labelPoint.x, y: view.bounds.height / 2 + labelPoint.y)
         
-        let xFromCenter = view.bounds.width / 2 - swipeLabel.center.x
+        let xFromCenter = view.bounds.width / 2 - matchUserImageView.center.x
         var rotation = CGAffineTransform(rotationAngle: xFromCenter / 200)
         let scale = min(100 / abs(xFromCenter), 1)
         var scaleAndRotated = rotation.scaledBy(x: scale, y: scale)
-        swipeLabel.transform = scaleAndRotated
+        matchUserImageView.transform = scaleAndRotated
         
         if gestureRecognizer.state == .ended {
-            if swipeLabel.center.x < (view.bounds.width / 2 - 100) {
+            if matchUserImageView.center.x < (view.bounds.width / 2 - 100) {
                 print("Not Interested")
-            } else if swipeLabel.center.x > (view.bounds.width / 2 + 100) {
+            } else if matchUserImageView.center.x > (view.bounds.width / 2 + 100) {
                 print("Interested")
             }
             
             rotation = CGAffineTransform(rotationAngle: 0)
             scaleAndRotated = rotation.scaledBy(x: 1, y: 1)
-            swipeLabel.transform = scaleAndRotated
+            matchUserImageView.transform = scaleAndRotated
             
-            swipeLabel.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
+            matchUserImageView.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
         }
         
     }
     
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        PFUser.logOut()
+        performSegue(withIdentifier: "goToSignUp", sender: nil)
+    }
+    
+    /*
+     Fetch Details for match
+     */
+    private func updateMatchingImage() {
+        if let query = PFUser.query() {
+            
+            if let isInterestedInWoman = PFUser.current()?["isInterestedInWoman"] {
+                query.whereKey("isFemale", equalTo: isInterestedInWoman)
+            }
+            if let isFemale = PFUser.current()?["isFemale"] {
+                query.whereKey("isInterestedInWoman", equalTo: isFemale)
+            }
+            query.limit = 1
+            query.findObjectsInBackground { (fetchedObjects, err) in
+                if let objects = fetchedObjects {
+                    for object in objects {
+                        if let user = object as? PFUser, let imageFile = user["photo"] as? PFFileObject {
+                            imageFile.getDataInBackground(block: { (data, err) in
+                                if let imageData = data {
+                                    self.matchUserImageView.image = UIImage(data: imageData)
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
     
 }
 

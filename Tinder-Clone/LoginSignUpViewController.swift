@@ -30,7 +30,12 @@ class LoginSignUpViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if PFUser.current() != nil {
-            self.performSegue(withIdentifier: "updateProfile", sender: nil)
+//            navigateFromLoginToMain
+            if PFUser.current()?["isFemale"] != nil {
+                self.performSegue(withIdentifier: "navigateFromLoginToMain", sender: nil)
+            } else {
+                self.performSegue(withIdentifier: "updateProfile", sender: nil)
+            }
         }
     }
     
