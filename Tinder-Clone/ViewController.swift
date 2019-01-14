@@ -21,12 +21,22 @@ class ViewController: UIViewController {
         
         setupDraggingGesture()
         updateMatchingImage()
+        saveLoggedInUserLocation()
     }
     
     private func setupDraggingGesture() {
         //  Pan Gesture is used to drag element Left or Right.
         let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(dragElementLeftOrRight(gestureRecognizer:)))
         matchUserImageView.addGestureRecognizer(swipeGesture)
+    }
+    
+    private func saveLoggedInUserLocation() {
+        PFGeoPoint.geoPointForCurrentLocation { (geoPoint, error) in
+            if let locationPoint = geoPoint {
+                PFUser.current()?["location"] = locationPoint
+                PFUser.current()?.saveInBackground()
+            }
+        }
     }
     
     @objc private func dragElementLeftOrRight(gestureRecognizer: UIPanGestureRecognizer) {
@@ -94,6 +104,10 @@ class ViewController: UIViewController {
                 ignoredUsers += rejectedUsers
             }
             query.whereKey("objectId", notContainedIn: ignoredUsers)
+            
+            if let geoPoint = PFUser.current()?["location"] as? PFGeoPoint {
+                query.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: geoPoint.latitude - 1, longitude: geoPoint.longitude - 1), toNortheast: PFGeoPoint(latitude: geoPoint.latitude + 1, longitude: geoPoint.longitude + 1))
+            }
             
             query.limit = 1
             query.findObjectsInBackground { (fetchedObjects, err) in
